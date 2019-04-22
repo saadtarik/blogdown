@@ -1,0 +1,127 @@
+
+
+<p>In 2013, I finished a class project where I used decision tree classification to identify the changes in river course of the <a href="https://en.wikipedia.org/wiki/Padma_River">Padma River</a> in Bangladesh. Later, NASA published a story titled <a href="https://earthobservatory.nasa.gov/world-of-change/PadmaRiver">World of Change: Padma River</a> visualizing changes from 1988 to 2018. Here, I am reproducing the class project using R from 1989 to 2019 using Random Forest.</p>
+<div id="load-raw-files" class="section level2">
+<h2>Load Raw Files</h2>
+<pre class="r"><code>library(raster)</code></pre>
+<pre><code>## Loading required package: sp</code></pre>
+<pre class="r"><code>load(&quot;Raw_Data/landsat.rda&quot;)
+
+R &lt;- 5
+G &lt;- 4
+B &lt;- 3
+plotRGB(all_2019_st_crop, r = R, g = G, b = B, stretch = &quot;lin&quot;, axes = TRUE,
+        main = paste(&quot;Landsat composite w/ Bands&quot;, R,&quot;,&quot;, G,&quot;, and&quot;, B, &quot;in 2019&quot;))
+box(col = &quot;white&quot;)</code></pre>
+<p><img src="Landsat_RiverChange_files/figure-html/rawdata-1.png" width="672" /></p>
+</div>
+<div id="train-data" class="section level2">
+<h2>Train Data</h2>
+<p>I created training polygons for both 1989 and 2019 images. The training polygons have to two classes: River and No River.</p>
+<pre class="r"><code>## Load Training set
+load(&quot;Raw_Data/training.rda&quot;)</code></pre>
+<p>The next step is to rasterize the polygon objects. It creates a raster with the values from the training polygons. Then the Landsat image bands are masked and combined with the newly-created raster containing the classes from the previous step.</p>
+<pre class="r"><code># 1989
+classes_1989 &lt;- rasterize(training_1989, all_1989_st_crop, field = &quot;Class_ID&quot;)
+names(classes_1989) &lt;- &quot;Classes&quot;
+plot(classes_1989, col = c(&quot;red&quot;, &quot;blue&quot;))
+legend(&quot;topright&quot;, legend = c(&quot;No River&quot;, &quot;River&quot;))</code></pre>
+<p><img src="Landsat_RiverChange_files/figure-html/Rasterize-1.png" width="672" /></p>
+<pre class="r"><code>mask_train_1989 &lt;- mask(all_1989_st_crop, classes_1989)
+# Combine the classes raster with the masked raster
+mask_train_1989_class &lt;- addLayer(mask_train_1989, classes_1989)
+plot(mask_train_1989_class)</code></pre>
+<p><img src="Landsat_RiverChange_files/figure-html/Rasterize-2.png" width="672" /></p>
+<pre class="r"><code># 2019
+classes_2019 &lt;- rasterize(training_2019, all_2019_st_crop, field = &quot;Class_ID&quot;)
+names(classes_2019) &lt;- &quot;Classes&quot;
+plot(classes_2019, col = c(&quot;red&quot;, &quot;blue&quot;))
+legend(&quot;topright&quot;, legend = c(&quot;No River&quot;, &quot;River&quot;))</code></pre>
+<p><img src="Landsat_RiverChange_files/figure-html/Rasterize-3.png" width="672" /></p>
+<pre class="r"><code>mask_train_2019 &lt;- mask(all_2019_st_crop, classes_2019)
+# Combine the classes raster with the masked raster
+mask_train_2019_class &lt;- addLayer(mask_train_2019, classes_2019)
+plot(mask_train_2019_class)</code></pre>
+<p><img src="Landsat_RiverChange_files/figure-html/Rasterize-4.png" width="672" /></p>
+<p>Then a <code>data.frame</code> object is created which will be used as an input in the <code>randomForest</code> function. This object includes the training data.</p>
+<pre class="r"><code># 1989
+mask_train_1989_values &lt;- getValues(mask_train_1989_class) # Get the values 
+mask_train_1989_values &lt;- na.omit(mask_train_1989_values) # Remove NAs
+df.mask_train_1989_values &lt;- data.frame(mask_train_1989_values) # Convert to data frame
+df.mask_train_1989_values$Classes &lt;- as.factor(df.mask_train_1989_values$Classes) # Convert classes to factor type
+
+# 2019
+mask_train_2019_values &lt;- getValues(mask_train_2019_class) # Get the values 
+mask_train_2019_values &lt;- na.omit(mask_train_2019_values) # Remove NAs
+df.mask_train_2019_values &lt;- data.frame(mask_train_2019_values) # Convert to data frame
+df.mask_train_2019_values$Classes &lt;- as.factor(df.mask_train_2019_values$Classes) # Convert classes to factor type</code></pre>
+</div>
+<div id="running-random-forest" class="section level2">
+<h2>Running Random Forest</h2>
+<p>Now we have all the necessary inputs for the <code>randomForest</code> function. This function belongs to the package <code>randomForest</code>. It produces a model object as an output which can be used for the prediction in the next step.</p>
+<pre class="r"><code>library(randomForest)</code></pre>
+<pre><code>## randomForest 4.6-14</code></pre>
+<pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
+<pre class="r"><code>model_rf_1989 &lt;- randomForest(x = df.mask_train_1989_values[, c(1:6)],
+                              y =df.mask_train_1989_values$Classes,
+                              importance = TRUE)
+
+colnames(model_rf_1989$confusion) &lt;- c(&quot;No River&quot;, &quot;River&quot;, &quot;Class Error&quot;)
+rownames(model_rf_1989$confusion) &lt;- c(&quot;No River&quot;, &quot;River&quot;)
+model_rf_1989</code></pre>
+<pre><code>## 
+## Call:
+##  randomForest(x = df.mask_train_1989_values[, c(1:6)], y = df.mask_train_1989_values$Classes,      importance = TRUE) 
+##                Type of random forest: classification
+##                      Number of trees: 500
+## No. of variables tried at each split: 2
+## 
+##         OOB estimate of  error rate: 0.03%
+## Confusion matrix:
+##          No River River  Class Error
+## No River   139226    11 7.900199e-05
+## River          35 40936 8.542628e-04</code></pre>
+<pre class="r"><code>varImpPlot(model_rf_1989)</code></pre>
+<p><img src="Landsat_RiverChange_files/figure-html/RF-1.png" width="672" /></p>
+<pre class="r"><code>model_rf_2019 &lt;- randomForest(x = df.mask_train_2019_values[, c(1:7)],
+                              y =df.mask_train_2019_values$Classes,
+                              importance = TRUE)
+
+colnames(model_rf_2019$confusion) &lt;- c(&quot;No River&quot;, &quot;River&quot;, &quot;Class Error&quot;)
+rownames(model_rf_2019$confusion) &lt;- c(&quot;No River&quot;, &quot;River&quot;)
+model_rf_2019</code></pre>
+<pre><code>## 
+## Call:
+##  randomForest(x = df.mask_train_2019_values[, c(1:7)], y = df.mask_train_2019_values$Classes,      importance = TRUE) 
+##                Type of random forest: classification
+##                      Number of trees: 500
+## No. of variables tried at each split: 2
+## 
+##         OOB estimate of  error rate: 0.02%
+## Confusion matrix:
+##          No River River  Class Error
+## No River    91135    14 0.0001535947
+## River          24 79964 0.0003000450</code></pre>
+<pre class="r"><code>varImpPlot(model_rf_2019)</code></pre>
+<p><img src="Landsat_RiverChange_files/figure-html/RF-2.png" width="672" /></p>
+<pre class="r"><code># Prediction
+predict_rf_1989 &lt;- predict(all_1989_st_crop, model = model_rf_1989, na.rm = TRUE)
+predict_rf_2019 &lt;- predict(all_2019_st_crop, model = model_rf_2019, na.rm = TRUE)
+
+# Visualilze
+plot(predict_rf_2019, col = c(&quot;red&quot;, &quot;blue&quot;))
+legend(&quot;bottomleft&quot;, legend = c(&quot;No River&quot;, &quot;River&quot;), fill = c(&quot;red&quot;, &quot;blue&quot;), bg = &quot;white&quot;)</code></pre>
+<p><img src="Landsat_RiverChange_files/figure-html/RF-3.png" width="672" /></p>
+<p>To visualize the final result of the changes in river course from 1989 to 2019, we need to set the ‘No River’ class as <code>NA</code>. Then the river classes from 1989 and 2019 are plotted on top of the other. For this purpose, the <code>quickPlot</code> package is used.</p>
+<pre class="r"><code># Set No River as NA export as polygon
+predict_rf_1989[predict_rf_1989 == 1] &lt;- NA
+predict_rf_2019[predict_rf_2019 == 1] &lt;- NA
+
+# Combined Plot
+library(quickPlot)
+clearPlot()
+Plot(predict_rf_1989, col = &quot;red&quot;, legend = FALSE, new = TRUE, title = &quot;&quot;)
+Plot(predict_rf_2019, col = &quot;blue&quot;, legend = FALSE, addTo = &quot;predict_rf_1989&quot;, title = FALSE)
+legend(&quot;bottomleft&quot;, legend = c(&quot;1989&quot;, &quot;2019&quot;), fill = c(&quot;red&quot;, &quot;blue&quot;), bg = &quot;white&quot;)</code></pre>
+<p><img src="Landsat_RiverChange_files/figure-html/Final%20results-1.png" width="672" /></p>
+</div>
