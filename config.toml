@@ -3,8 +3,11 @@ languageCode = "en-us"
 title = "Saad Tarik"
 theme = "hugo-theme-jane"
 googleAnalytics = ""
-disqusShortname = ""
+disqusShortname = "saadtarik.disquss.com"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+customCSS = ['custom.css']
+color_theme = "ocean"
+font = "playfair"
 
 [permalinks]
     post = "/:year/:month/:day/:slug/"

@@ -2,9 +2,9 @@
   font-family: 'Merriweather';
   font-style: normal;
   font-weight: 400;
-  src: local('Merriweather'), local('Merriweather-Regular'),
-       url('../fonts/merriweather-v13-latin-regular.woff2') format('woff2'),
-       url('../fonts/merriweather-v13-latin-regular.woff') format('woff');
+  src: local('RobotoSlab'), local('RobotoSlab-Regular'),
+       url('../fonts/RobotoSlab-Regular.ttf') format('ttf'),
+       url('../fonts/RobotoSlab-Regular.ttf') format('ttf');
 }
 @font-face {
   font-family: 'Lato';
@@ -15,7 +15,7 @@
        url('../fonts/lato-v11-latin-regular.woff') format('woff');
 }
 body {
-  font-family: 'Merriweather', serif;
+  font-family: 'Times New Roman', serif;
 }
 h1, h2, h3, h4, h5, h6, .nav, .article-duration, .archive-item-link, .footer {
   font-family: 'Lato', sans-serif;
