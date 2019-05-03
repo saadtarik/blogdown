@@ -1,6 +1,9 @@
-baseurl = "https://www.example.org/"
-title = "Kiera"
-copyright = "Copyright &copy; 2017 - Author Name"
+baseurl = "https://saadtarik.netlify.com/"
+title = "Saad Tarik"
+googleAnalytics = "UA-139537268-1"
+disqusShortname = "saad-tarik.disqus.com"
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+copyright = "Saad Tarik"
 canonifyurls = true
 theme = "hugo-kiera"
 
@@ -11,15 +14,15 @@ enableEmoji = true
 pygmentsCodeFences = true
 
 [author]
-    name = ""
-    github = ""
+    name = "Saad Tarik"
+    github = "https://github.com/saadtarik"
     gitlab = ""
-    linkedin = ""
+    linkedin = "https://www.linkedin.com/in/saad-tarik-96240636/"
     facebook = ""
-    twitter = ""
-    instagram = ""
+    twitter = "https://twitter.com/saadtarik"
+    instagram = "https://www.instagram.com/saadtarik/"
 
 [params]
-    tagline = "A Hugo theme for creative and technical writing"
+    tagline = "Saad Tarik's Website"
 
 
