@@ -1,11 +1,10 @@
-baseurl = "/"
+baseurl = "https://saadtarik.netlify.com//"
 languageCode = "en-us"
 title = "Saad Tarik"
 theme = "hugo-theme-jane"
 googleAnalytics = "UA-139537268-1"
 disqusShortname = "saad-tarik.disqus.com"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
-customCSS = ['custom.css']
 copyright = "Saad Tarik"
 color_theme = "ocean"
 font = "playfair"
