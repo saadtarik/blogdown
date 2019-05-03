@@ -24,6 +24,9 @@ font = "playfair"
 [[menu.main]]
     name = "LinkedIn"
     url = "https://www.linkedin.com/in/saad-tarik-96240636/"
+[[menu.main]]
+    name = "Contact"
+    url = "/Contact/"
 
 [params]
     description = "Saad Tarik's Website"
