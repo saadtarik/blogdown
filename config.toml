@@ -7,6 +7,19 @@ copyright = "Saad Tarik"
 canonifyurls = true
 theme = "hugo-kiera"
 
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 1
+[[menu.main]]
+    name = "Projects"
+    url = "/projects/"
+    weight = 2
+[[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 3
+
 paginate = 3
 
 summaryLength = 30
@@ -15,14 +28,14 @@ pygmentsCodeFences = true
 
 [author]
     name = "Saad Tarik"
-    github = "https://github.com/saadtarik"
+    github = "saadtarik"
     gitlab = ""
-    linkedin = "https://www.linkedin.com/in/saad-tarik-96240636/"
+    linkedin = "saad-tarik-96240636/"
     facebook = ""
-    twitter = "https://twitter.com/saadtarik"
-    instagram = "https://www.instagram.com/saadtarik/"
+    twitter = "saadtarik"
+    instagram = "saadtarik/"
 
 [params]
-    tagline = "Saad Tarik's Website"
+    tagline = ""
 
 
