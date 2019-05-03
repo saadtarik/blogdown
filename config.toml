@@ -21,9 +21,12 @@ font = "playfair"
 [[menu.main]]
     name = "Twitter"
     url = "https://twitter.com/saadtarik"
+[[menu.main]]
+    name = "LinkedIn"
+    url = "https://www.linkedin.com/in/saad-tarik-96240636/"
 
 [params]
-    description = "A website built through Hugo and blogdown."
+    description = "Saad Tarik's Website"
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"
@@ -42,4 +45,11 @@ font = "playfair"
     width = 50
     height = 50
     alt = "Logo"
+
+[params.social]
+    a-email = "mailto:saad023b@gmail.com"
+    b-github = "https://github.com/saadtarik"
+    c-linkedin = "https://www.linkedin.com/in/saad-tarik-96240636/"
+    d-twitter = "https://twitter.com/saadtarik"
+    e-instagram = "https://www.instagram.com/saadtarik/"
 

@@ -1,19 +1,24 @@
 ---
-title: Observed Changes in Padma River from Landsat using Random Forest
-author: Saad Tarik
+title: "Observed Changes in Padma River from Landsat using Random Forest"
+author: "Saad Tarik"
 date: '2019-04-30'
-slug: landsatriverchange
-categories: []
-tags: [R, Landsat, Padma, Bangladesh, Random Forest]
-lastmod: '2019-04-30T05:07:36-04:00'
-keywords: []
-description: ''
 comment: yes
-toc: yes
-autoCollapseToc: yes
 contentCopyright: no
-reward: no
+categories: []
+description: ''
+keywords: []
+lastmod: '2019-04-30T05:07:36-04:00'
 mathjax: yes
+reward: no
+slug: landsatriverchange
+tags:
+- R
+- Landsat
+- Padma
+- Bangladesh
+- Random Forest
+autoCollapseToc: yes
+toc: yes
 ---
 
 <!--more-->
@@ -120,3 +125,6 @@ Plot(predict_rf_2019, col = "blue", legend = FALSE, addTo = "predict_rf_1989", t
 legend("bottomleft", legend = c("1989", "2019"), fill = c("red", "blue"), bg = "white")
 ```
 <img src="/post/2019-04-30-landsatriverchange_files/Screen Shot 2019-05-03 at 2.20.13 AM.png" alt="1989 vs 2019" width="90%" height="90%"/>
+
+# Further Readings and References
+For more information, I would suggest the article published by NASA, [World of Change: Padma River](https://earthobservatory.nasa.gov/world-of-change/PadmaRiver) that includes references for relevant studies. It also includes a nice animation showing the change in the river course. These two tutorials ([Tutorial 1](https://www.earthdatascience.org/courses/earth-analytics/multispectral-remote-sensing-data/landsat-data-in-r-geotiff/) and [Tutorial 2](https://geoscripting-wur.github.io/AdvancedRasterAnalysis/)) helped me to process the landsat data and running the random forest. 
