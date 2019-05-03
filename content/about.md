@@ -10,4 +10,4 @@ I am interested in geospatial and remote sensing data analysis and visualization
 
 My other interests include traveling, photography, and gaming. You can find my travel photos in my [Instagram](https://www.instagram.com/saadtarik/) and [Flickr](https://www.flickr.com/photos/saad_gallery/).
 
-<img src="/static/about_files/IMG_5232-01.jpeg" alt="Photo" width="60%" height="60%"/>
+<img src="/./static/about_files/IMG_5232-01.jpeg" alt="Photo" width="60%" height="60%"/>
