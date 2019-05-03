@@ -6,7 +6,7 @@ googleAnalytics = "UA-139537268-1"
 disqusShortname = "saad-tarik.disqus.com"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 customCSS = ['custom.css']
-copyright = ""
+copyright = "Saad Tarik"
 color_theme = "ocean"
 font = "playfair"
 
