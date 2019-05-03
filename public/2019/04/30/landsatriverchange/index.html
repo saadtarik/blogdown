@@ -69,7 +69,7 @@
 
 <meta itemprop="datePublished" content="2019-04-30T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-04-30T05:07:36-04:00" />
-<meta itemprop="wordCount" content="232">
+<meta itemprop="wordCount" content="403">
 
 
 
@@ -268,6 +268,7 @@
 <ul>
 <li><a href="#data-used">Data Used</a></li>
 <li><a href="#load-raw-data">Load Raw Data</a></li>
+<li><a href="#train-data">Train Data</a></li>
 </ul>
 </nav>
   </div>
@@ -297,6 +298,37 @@ box(col = &quot;white&quot;)
 </code></pre>
 
 <p><img src="/post/2019-04-30-landsatriverchange_files/Landsat2019_543.png" alt="Landsat 2019 543" height="300px"/></p>
+
+<h1 id="train-data">Train Data</h1>
+
+<p>I created training polygons for both 1989 and 2019 images. The training polygons have to two classes: River and No River so that we can identify the changes in the river course easily.</p>
+
+<pre><code class="language-r">training_2019 &lt;- shapefile(&quot;Train_2019.shp&quot;)
+training_1989 &lt;- shapefile(&quot;Train_1989.shp&quot;)
+</code></pre>
+
+<p>The next step is to rasterize the polygon objects. It creates a raster with the values from the training polygons. Then the Landsat image bands are masked and combined with the newly-created raster containing the classes from the previous step. Repeat the process for the other image stack.</p>
+
+<pre><code class="language-r"># 1989
+classes_1989 &lt;- rasterize(training_1989, all_1989_st_crop, field = &quot;Class_ID&quot;)
+names(classes_1989) &lt;- &quot;Classes&quot;
+plot(classes_1989, col = c(&quot;red&quot;, &quot;blue&quot;))
+legend(&quot;topright&quot;, legend = c(&quot;No River&quot;, &quot;River&quot;))
+mask_train_1989 &lt;- mask(all_1989_st_crop, classes_1989)
+# Combine the classes raster with the masked raster
+mask_train_1989_class &lt;- addLayer(mask_train_1989, classes_1989)
+plot(mask_train_1989_class)
+
+# 2019
+classes_2019 &lt;- rasterize(training_2019, all_2019_st_crop, field = &quot;Class_ID&quot;)
+names(classes_2019) &lt;- &quot;Classes&quot;
+plot(classes_2019, col = c(&quot;red&quot;, &quot;blue&quot;))
+legend(&quot;topright&quot;, legend = c(&quot;No River&quot;, &quot;River&quot;))
+mask_train_2019 &lt;- mask(all_2019_st_crop, classes_2019)
+# Combine the classes raster with the masked raster
+mask_train_2019_class &lt;- addLayer(mask_train_2019, classes_2019)
+plot(mask_train_2019_class)
+</code></pre>
     </div>
 
     
