@@ -3,6 +3,7 @@ title: "Observed Changes in Padma River from Landsat using Random Forest"
 author: "Saad Tarik"
 date: '2019-04-30'
 comment: yes
+disqus: true
 contentCopyright: no
 categories: []
 description: ''
