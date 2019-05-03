@@ -104,7 +104,6 @@ legend("bottomleft", legend = c("No River", "River"), fill = c("red", "blue"), b
 ```
 This figure shows the prediction from the year 2019 using random forest.
 <img src="/post/2019-04-30-landsatriverchange_files/Screen Shot 2019-05-03 at 2.17.55 AM.png" alt="" width="80%"/>
-<img src="/post/2019-04-30-landsatriverchange_files/Screen Shot 2019-05-03 at 2.20.13 AM.png" alt="1989 vs 2019" width="90%" height="90%"/>
 
 To visualize the final result of the changes in river course from 1989 to 2019, we need to set the ‘No River’ class as `NA`. Then the river classes from 1989 and 2019 are plotted on top of the other using the package `quickPlot`.
 
@@ -120,3 +119,4 @@ Plot(predict_rf_1989, col = "red", legend = FALSE, new = TRUE, title = "")
 Plot(predict_rf_2019, col = "blue", legend = FALSE, addTo = "predict_rf_1989", title = FALSE)
 legend("bottomleft", legend = c("1989", "2019"), fill = c("red", "blue"), bg = "white")
 ```
+<img src="/post/2019-04-30-landsatriverchange_files/Screen Shot 2019-05-03 at 2.20.13 AM.png" alt="1989 vs 2019" width="90%" height="90%"/>
