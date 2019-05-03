@@ -1,5 +1,4 @@
 ---
-date: "2019-04-20T21:48:51-07:00"
 title: About
 ---
 [Github](https://github.com/saadtarik); [Twitter](https://twitter.com/saadtarik); [LinkedIn](https://www.linkedin.com/in/saad-tarik-96240636/)
