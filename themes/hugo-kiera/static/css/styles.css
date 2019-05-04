@@ -89,7 +89,7 @@ time {
 }
 
 #container nav ul li a.active {
-  border-bottom: 0.5em solid #3a5e72;
+  border-bottom: 0.5em solid #666666;
 }
 
 #container main {
@@ -125,7 +125,7 @@ time {
 
 #container main section#list ul li {
   padding: 0.5em 0;
-  border-bottom: 1px solid #cecece;
+  border-bottom: 1px solid #3a5e72;
 }
 
 #container main section#list ul li time, #container main section#list ul li span.count {
