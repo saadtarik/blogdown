@@ -2,7 +2,7 @@
 date: "2019-04-20T21:48:51-07:00"
 title: About
 ---
-[Github](https://github.com/saadtarik); [Twitter](https://twitter.com/saadtarik); [LinkedIn](https://www.linkedin.com/in/saad-tarik-96240636/)
+[Github](https://github.com/saadtarik); [Twitter](https://twitter.com/saadtarik); [LinkedIn](https://www.linkedin.com/in/saadtarik/)
 
 Hello, my name is Saad. I received my Master of Science in [Geological and Atmospheric Sciences](https://ge-at.iastate.edu/) from [Iowa State University](www.iastate.edu). Previously, I completed Master of Science in [Civil and Environmental Engineering](https://cee.umd.edu/) from [University of Maryland](www.umd.edu) and Bachelor of Science in [Water Resources Engineering](http://wre.buet.ac.bd/) from [Bangladesh University of Engineering and Technology](http://buet.ac.bd/).
 
