@@ -1,7 +1,7 @@
 baseurl = "https://saadtarik.netlify.com/"
 title = "Saad Tarik"
 googleAnalytics = "UA-139537268-1"
-disqusShortname = "saad-tarik.disqus.com"
+disqusShortname = "saad-tarik"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 copyright = "Saad Tarik"
 canonifyurls = true
